@@ -1,0 +1,65 @@
+01 - Quantidade de resposta = 
+ COUNTA(F_Pesquisa[Resposta])
+
+
+02 - Resultado Obtido = 
+VAR CONCORDO = CALCULATE([01 - Quantidade de resposta],F_Pesquisa[Resp_Relevante] = "Concordo")
+VAR PesoConcordo = CALCULATE(VALUES(F_Pesquisa[Peso]), F_Pesquisa[Resp_Relevante] = "Concordo")
+
+VAR CONCORDOTOTA = CALCULATE([01 - Quantidade de resposta],F_Pesquisa[Resp_Relevante] = "Concordo totalmente")
+VAR PesoConcordotota = CALCULATE(VALUES(F_Pesquisa[Peso]),F_Pesquisa[Resp_Relevante] = "Concordo totalmente")
+
+VAR NApli = CALCULATE([01 - Quantidade de resposta],F_Pesquisa[Resp_Relevante] = "Não aplicável")
+VAR PesoNA = CALCULATE(VALUES(F_Pesquisa[Peso]),F_Pesquisa[Resp_Relevante] = "Não aplicável")
+
+VAR NemNem = CALCULATE([01 - Quantidade de resposta],F_Pesquisa[Resp_Relevante] = "Não concordo nem discordo")
+VAR PesoNemNem = CALCULATE(VALUES(F_Pesquisa[Peso]),F_Pesquisa[Resp_Relevante] = "Não concordo nem discordo")
+
+VAR Discordo = CALCULATE([01 - Quantidade de resposta],F_Pesquisa[Resp_Relevante] = "Discordo")
+VAR PesoDiscordo = CALCULATE(VALUES(F_Pesquisa[Peso]),F_Pesquisa[Resp_Relevante] = "Discordo")
+
+VAR DiscTT = CALCULATE([01 - Quantidade de resposta],F_Pesquisa[Resp_Relevante] = "Discordo Totalmente")
+VAR PesoDiscTT = CALCULATE(VALUES(F_Pesquisa[Peso]),F_Pesquisa[Resp_Relevante] = "Discordo Totalmente")
+
+RETURN
+DIVIDE(
+    ((CONCORDO * PesoConcordo) + (CONCORDOTOTA * PesoConcordotota) + (NApli * PesoNA) + (NemNem * PesoNemNem) + (Discordo * PesoDiscordo) +( DiscTT * PesoDiscTT)),
+    [01 - Quantidade de resposta]
+ )
+
+03 - Resultado esperado = 
+3
+
+04 - Satisfação da Pesqusia = 
+DIVIDE(
+    ([02 - Resultado Obtido] - [03 - Resultado esperado]),
+    100
+    )
+
+05 - Quantidade de participante = 
+DISTINCTCOUNT(d_Codigo[Código da pessoa])
+
+06 - Méida de resposta por participante = 
+DIVIDE(
+[01 - Quantidade de resposta],
+[05 - Quantidade de participante]
+)
+
+07 - Média de resposta por área = 
+VAR AREA =DISTINCTCOUNT(d_Codigo[Área])
+RETURN
+DIVIDE(
+    [01 - Quantidade de resposta],
+    AREA
+)
+
+08 - Média de Resposta por categoria = 
+DIVIDE(
+    [01 - Quantidade de resposta],
+    DISTINCTCOUNT(F_Pesquisa[Categoria])
+)
+
+09 - Quantidade de perguntas = 
+DISTINCTCOUNT(
+    F_Pesquisa[Pergunta]
+)
