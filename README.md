@@ -31,9 +31,33 @@ Fornecer uma ferramenta visual e interativa que ajude a identificar pontos forte
 Power BI
 Linguagem M
 DAX
-Excel
+Excel.
+
+
+
+⚙️Modelagem:
+ Tratamento de Dados no Power Query
+![image](https://github.com/user-attachments/assets/5520c623-5416-45e7-a566-0aadadcc8cc4)
+
+
+ Planilha após tratamento na linguagem M:
+![image](https://github.com/user-attachments/assets/550134a7-c26e-4394-bc77-687a37e49f5c)
+
+
+
+
+Utilizei o Power Query para transformar os dados brutos da pesquisa de satisfação dos funcionários. Originalmente, os dados estavam distribuídos em 30 colunas diferentes, cada uma representando uma pergunta. Através do script, desagrupei essas colunas em linhas, consolidando as respostas em apenas 6 colunas principais: Área, Pergunta, Resposta, Categoria, Resp_Relevante e Peso.
+
+Essa transformação simplificou a análise, permitindo uma visão mais clara e categorizada dos resultados, facilitando a criação do dashboard no Power BI.
+
 
 📂 Estrutura do Repositório:
+
 Data/: Contém os datasets utilizados.
 Dashboard/: Arquivo do Power BI.
-Documentation/: Documentação detalhada sobre o projeto e seu uso.
+Linguagem.M/: Codigo M explicado.
+Dax/: Medidas DAX usadas e explicadas.
+
+
+
+ 
